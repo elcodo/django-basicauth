@@ -1,8 +1,11 @@
 import base64
 import binascii
-
-from urllib.parse import unquote_plus
-
+try:
+    from urllib.parse import unquote_plus
+except ImportError:
+    # Script is being executed using Python 2.7 rather than 3+
+    from urllib import unquote_plus
+    
 from django.conf import settings
 
 
