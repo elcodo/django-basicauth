@@ -6,7 +6,7 @@ from .response import HttpResponseUnauthorized
 class BasicAuthMiddleware:
     
     def process_request(self, request):
-        if not settings.getattr('BASICAUTH_ENABLED', True):
+        if not getattr(settings, 'BASICAUTH_ENABLED', True):
             return None
         
         validated_username = validate_request(request)
