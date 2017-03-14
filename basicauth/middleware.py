@@ -1,9 +1,14 @@
+from django.conf import settings
 from .basicauthutils import validate_request
 from .response import HttpResponseUnauthorized
 
 
 class BasicAuthMiddleware:
+    
     def process_request(self, request):
+        if not settings.getattr('BASICAUTH_ENABLED', True):
+            return None
+        
         validated_username = validate_request(request)
         if validated_username is None:
             return HttpResponseUnauthorized()
